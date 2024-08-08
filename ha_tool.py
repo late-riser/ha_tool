@@ -12,6 +12,11 @@ class dircreator:
         newdir = f"ha_{self.chara}_{self.version}{self.alt}"
         return newdir
     
+    def charaSearch(self):
+        for i in os.listdir(direc):
+            if self.chara in i:
+                print(i)
+        
     
 class folderDir:
     def __init__(self, sname, fname, bigfname, haname):
@@ -48,7 +53,7 @@ class postFold:
             shutil.copy(self.photodir, f"{dd}/{self.sname}/tex/system/{self.haname}/{self.fname}_ifs/tex")
             os.rename(f"{dd}/{self.sname}/tex/system/{self.haname}/{self.fname}_ifs/tex/{self.photoname}", f"{dd}/{self.sname}/tex/system/{self.haname}/{self.fname}_ifs/tex/{self.fname}.png")
             
-            
+
         
 working =  True
 
@@ -65,11 +70,12 @@ while working:
                 version = input("Which version\n")
                 if version.isdigit() == True:
                     altc = input("Which alt would you like to replace (a , b, etc., leave blank if no alt)\n")
-                    modname = input("Name your mod\n")
-                    modname = modname.lower()
+                    ##old mod name place
                     newdir = dircreator(chara,version,altc)
                     newdirbig = F"{direc}\\{newdir}_ifs"
                     if os.path.exists(newdirbig) ==True:
+                        modname = input("Name your mod\n")
+                        modname = modname.lower()
                         os.chdir(newdirbig)
                         eek = folderDir(modname,newdir,newdirbig,haname)
                         
@@ -89,6 +95,8 @@ while working:
                             print("This file does not exist\n")
                     else:
                         print("There was an error in chara, ver, alt input")
+                        print("possible charcter files")
+                        dircreator.charaSearch(newdir)
                 else:
                     print("Please use a number here\n")
             else:
@@ -96,7 +104,6 @@ while working:
 
             
 
-        
 
 
                 
